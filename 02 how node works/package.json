@@ -1,0 +1,12 @@
+{
+  "devDependencies": {
+    "@types/node": "^18.15.11",
+    "typescript": "^5.0.4"
+  },
+  "scripts": {
+    "dev": "nodemon --exec node --inspect -r ts-node/register src/index.ts"
+  },
+  "dependencies": {
+    "ts-node": "^10.9.1"
+  }
+}

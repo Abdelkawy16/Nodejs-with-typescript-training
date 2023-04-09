@@ -1,0 +1,37 @@
+import * as fs from 'fs';
+import * as http from 'http';
+
+
+export function MyStreams() {
+    const server = http.createServer();
+    server.on('request', (req, res) => {
+        //Solution 1
+        // fs.readFile(`${__dirname}/../test-file.txt`, 'utf-8', (err, data) => {
+        //     res.end(data);
+        // });
+
+        //Solution 2: Streams
+        // const readable = fs.createReadStream(`${__dirname}/../test-file.txt`, 'utf-8');
+        // readable.on('data', (chunk) => {
+        //     res.write(chunk);
+        // });
+        // readable.on('end', () => {
+        //     res.end();
+        // });
+        // readable.on('error', (err) => {
+        //     console.log(err);
+        //     res.statusCode = 500;
+        //     res.end('File not found!');
+        // });
+        
+        //Solution 3
+        const readable = fs.createReadStream(`${__dirname}/../test-file.txt`, 'utf-8');
+        // readableSource.pipe(writeableDestination);
+        readable.pipe(res);
+        
+        
+    });
+    server.listen(8000, '127.0.0.1', () => {
+        console.log('Listening to requests on port 8000');
+    });
+}
